@@ -1,0 +1,37 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.querySelector('.login-form');
+
+    loginForm.addEventListener('submit', (e) => {
+        // 1. Prevent the form from actually submitting to a server yet
+        e.preventDefault();
+
+        // 2. Grab the data from the inputs
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const rememberMe = document.querySelector('input[type="checkbox"]').checked;
+
+        // 3. Simple client-side validation check
+        if (!email || !password) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // 4. Visual feedback (Loading state)
+        const loginBtn = document.querySelector('.login-btn');
+        const originalText = loginBtn.textContent;
+        loginBtn.textContent = 'Signing in...';
+        loginBtn.disabled = true;
+
+        // 5. Simulate an API call
+        console.log('Attempting login with:', { email, rememberMe });
+
+        setTimeout(() => {
+            // This is where you'd normally handle the server response
+            alert(`Logged in successfully as: ${email}`);
+            
+            // Reset button
+            loginBtn.textContent = originalText;
+            loginBtn.disabled = false;
+        }, 1500);
+    });
+});
